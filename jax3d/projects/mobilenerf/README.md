@@ -14,22 +14,46 @@ git clone https://github.com/google-research/jax3d.git
 cd jax3d/jax3d/projects/mobilenerf
 ```
 
+
 ## Installation
 
 You will need 8 v100 GPUs to successfully train the model.
 
 We recommend using [Anaconda](https://www.anaconda.com/products/individual) to set up the environment. Clone the repo, go to the mobilenerf folder, and run the following commands:
 
+### Auto
+
 ```
-function init_env() {
+function env_setup() {
     conda create --name mobilenerf python=3.7; conda activate mobilenerf
     conda install pip; pip install --upgrade pip
     pip install -r requirements.txt
 }
-init_env
+env_setup
+```
 
-# Manual for A10/A100-GPU
-# Other GPU Type select correct binding relation from: https://www.nvidia.com/download/index.aspx?lang=en-us
+### Manual (take A10/A100 as an example)
+-  Other GPU Type select correct binding relation from: https://www.nvidia.com/download/index.aspx?lang=en-us
+
+- 1.change `requirements.txt`
+
+```
+numpy>=1.16.4
+# jax>=0.2.6      # close auto install, use mannual install
+# jaxlib>=0.1.69  # close auto install, use mannual install
+flax>=0.2.2
+opencv-python>=4.4.0
+Pillow>=7.2.0
+matplotlib>=3.3.4
+tqdm>=4.50.2    # ModuleNotFoundError: No module named 'tqdm'
+```
+
+- 2.setup-env
+
+```shell
+# run env_setup
+env_setup
+
 function jax_env() {    
     # torch + cuda
     if [[ ! -f torch-1.10.1+cu111-cp37-cp37m-linux_x86_64.whl ]]; then
