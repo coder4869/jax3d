@@ -7,6 +7,12 @@ This code is created by [Zhiqin Chen](https://czq142857.github.io/) when he was 
 *Please note that this is not an officially supported Google product.*
 
 
+## Download
+
+```
+svn export https://github.com/google-research/jax3d/tree/main/jax3d/projects/mobilenerf
+```
+
 ## Installation
 
 You will need 8 v100 GPUs to successfully train the model.
