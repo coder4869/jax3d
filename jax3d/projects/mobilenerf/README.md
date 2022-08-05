@@ -29,7 +29,7 @@ function init_env() {
 init_env
 
 # Manual for A10/A100-GPU
-# 其他型号参照https://www.nvidia.com/download/index.aspx?lang=en-us，选择正确CUDA版本和驱动
+# Other GPU Type select correct binding relation from: https://www.nvidia.com/download/index.aspx?lang=en-us
 function jax_env() {    
     # torch + cuda
     if [[ ! -f torch-1.10.1+cu111-cp37-cp37m-linux_x86_64.whl ]]; then
