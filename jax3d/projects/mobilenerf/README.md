@@ -33,25 +33,14 @@ env_setup
 ```
 
 ### Manual (take A10/A100 as an example)
--  Other GPU Type select correct binding relation from: https://www.nvidia.com/download/index.aspx?lang=en-us
-
-- 1.change `requirements.txt`
-
-```
-numpy>=1.16.4
-# jax>=0.2.6      # close auto install, use mannual install
-# jaxlib>=0.1.69  # close auto install, use mannual install
-flax>=0.2.2
-opencv-python>=4.4.0
-Pillow>=7.2.0
-matplotlib>=3.3.4
-tqdm>=4.50.2    # ModuleNotFoundError: No module named 'tqdm'
-```
-
-- 2.setup-env
+- Other GPU Type select correct binding relation from: https://www.nvidia.com/download/index.aspx?lang=en-us
 
 ```shell
-# run env_setup
+function env_setup() {
+    conda create --name mobilenerf python=3.7; conda activate mobilenerf
+    conda install pip; pip install --upgrade pip
+    pip install -r requirements-no-jax.txt
+}
 env_setup
 
 function jax_env() {    
@@ -78,7 +67,6 @@ jax_env
 ```
 
 Please make sure that your jax supports GPU. You might need to re-install jax by following the [jax installation guide](https://github.com/google/jax#installation).
-
 
 
 ## Data
