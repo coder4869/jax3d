@@ -11,6 +11,7 @@ This code is created by [Zhiqin Chen](https://czq142857.github.io/) when he was 
 
 ```
 git clone https://github.com/google-research/jax3d.git
+cd jax3d/jax3d/projects/mobilenerf
 ```
 
 ## Installation
@@ -20,9 +21,36 @@ You will need 8 v100 GPUs to successfully train the model.
 We recommend using [Anaconda](https://www.anaconda.com/products/individual) to set up the environment. Clone the repo, go to the mobilenerf folder, and run the following commands:
 
 ```
-conda create --name mobilenerf python=3.6.13; conda activate mobilenerf
-conda install pip; pip install --upgrade pip
-pip install -r requirements.txt
+function init_env() {
+    conda create --name mobilenerf python=3.7; conda activate mobilenerf
+    conda install pip; pip install --upgrade pip
+    pip install -r requirements.txt
+}
+init_env
+
+# Manual for A10/A100-GPU
+# 其他型号参照https://www.nvidia.com/download/index.aspx?lang=en-us，选择正确CUDA版本和驱动
+function jax_env() {    
+    # torch + cuda
+    if [[ ! -f torch-1.10.1+cu111-cp37-cp37m-linux_x86_64.whl ]]; then
+        wget https://download.pytorch.org/whl/cu111/torch-1.10.1%2Bcu111-cp37-cp37m-linux_x86_64.whl --no-check-certificate
+    fi
+    pip install torch-1.10.1+cu111-cp37-cp37m-linux_x86_64.whl
+
+    if [[ ! -f torchvision-0.11.2+cu111-cp37-cp37m-linux_x86_64.whl ]]; then
+        wget https://download.pytorch.org/whl/cu111/torchvision-0.11.2%2Bcu111-cp37-cp37m-linux_x86_64.whl --no-check-certificate
+    fi
+    pip install torchvision-0.11.2+cu111-cp37-cp37m-linux_x86_64.whl
+
+    # jaxlib
+    pip install jax==0.3.14
+    # https://storage.googleapis.com/jax-releases/cuda11
+    if [[ ! -f jaxlib-0.3.14+cuda11.cudnn82-cp37-none-manylinux2014_x86_64.whl ]]; then
+        wget https://storage.googleapis.com/jax-releases/cuda11/jaxlib-0.3.14+cuda11.cudnn82-cp37-none-manylinux2014_x86_64.whl --no-check-certificate
+    fi 
+    pip install jaxlib-0.3.14+cuda11.cudnn82-cp37-none-manylinux2014_x86_64.whl 
+}
+jax_env
 ```
 
 Please make sure that your jax supports GPU. You might need to re-install jax by following the [jax installation guide](https://github.com/google/jax#installation).
