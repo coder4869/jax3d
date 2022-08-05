@@ -10,7 +10,7 @@ This code is created by [Zhiqin Chen](https://czq142857.github.io/) when he was 
 ## Download
 
 ```
-svn export https://github.com/google-research/jax3d/tree/main/jax3d/projects/mobilenerf
+svn export https://github.com/coder4869/jax3/trunk/jax3d/projects/mobilenerf
 ```
 
 ## Installation
